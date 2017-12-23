@@ -38,6 +38,14 @@
                 android:text="@string/score"
                 android:textSize="60sp"
                 android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/team_a_foul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="24sp"
+                android:textColor="#ffffff"/>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,6 +95,13 @@
                 android:layout_marginBottom="24dp"
                 android:text="@string/score"
                 android:textSize="60sp"
+                android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/team_b_foul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="24sp"
                 android:textColor="#ffffff"/>
             <Button
                 android:layout_width="match_parent"
