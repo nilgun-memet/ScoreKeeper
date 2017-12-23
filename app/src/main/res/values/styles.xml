@@ -4,7 +4,7 @@
         <!-- Primary theme color of the app (sets background color of app bar) -->
         <item name="colorPrimary">#000000</item>
         <!-- First 2 digits define the transparency. Next 6 digits define the background color of buttons in the app -->
-        <item name="colorButtonNormal">#A6000000</item>
+        <item name="colorButtonNormal">#80000000</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
 
