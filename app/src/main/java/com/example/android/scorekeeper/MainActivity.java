@@ -12,27 +12,59 @@ public class MainActivity extends AppCompatActivity {
     int foulTeamA = 0;
     int foulTeamB = 0;
 
+    TextView scoreViewA;
+    TextView scoreViewB;
+    TextView foulViewA;
+    TextView foulViewB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        scoreViewA = findViewById(R.id.team_a_score);
+        scoreViewB = findViewById(R.id.team_b_score);
+        foulViewA = findViewById(R.id.team_a_foul);
+        foulViewB = findViewById(R.id.team_b_foul);
 
+        //retrieve values that are saved
+        if (savedInstanceState!=null) {
+            scoreTeamA = savedInstanceState.getInt("scoreA",0);
+            scoreTeamB = savedInstanceState.getInt("scoreB",0);
+            foulTeamA = savedInstanceState.getInt("foulA",0);
+            foulTeamB = savedInstanceState.getInt("foulB",0);
+            displayScoreForTeamA();
+            displayScoreForTeamB();
+            if (foulTeamA > 0) {
+                displayFoulForTeamA("# of fouls: " + foulTeamA );
+            }
+            if (foulTeamB > 0) {
+                displayFoulForTeamB("# of fouls: " + foulTeamB);
+            }
+        }
+    }
+
+    //Saving the variables when the screen is rotated
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("scoreA",scoreTeamA);
+        outState.putInt("scoreB",scoreTeamB);
+        outState.putInt("foulA",foulTeamA);
+        outState.putInt("foulB",foulTeamB);
+        super.onSaveInstanceState(outState);
     }
 
     /**
      * Displays the given score for Team A.
      */
     public void displayScoreForTeamA() {
-        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
-        scoreView.setText(String.valueOf(scoreTeamA));
+        scoreViewA.setText(String.valueOf(scoreTeamA));
     }
 
     /**
      * Displays the given foul for Team A.
      */
     public void displayFoulForTeamA(String foulMessage) {
-        TextView scoreView = (TextView) findViewById(R.id.team_a_foul);
-        scoreView.setText(foulMessage);
+        foulViewA.setText(foulMessage);
     }
 
     /**
@@ -56,16 +88,14 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given score for Team B.
      */
     public void displayScoreForTeamB() {
-        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
-        scoreView.setText(String.valueOf(scoreTeamB));
+        scoreViewB.setText(String.valueOf(scoreTeamB));
     }
 
     /**
      * Displays the given foul for Team B.
      */
     public void displayFoulForTeamB(String foulMessage) {
-        TextView scoreView = (TextView) findViewById(R.id.team_b_foul);
-        scoreView.setText(foulMessage);
+        foulViewB.setText(foulMessage);
     }
 
     /**
