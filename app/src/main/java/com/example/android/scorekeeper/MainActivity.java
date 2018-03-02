@@ -7,15 +7,17 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    int scoreTeamA = 0;
-    int scoreTeamB = 0;
-    int foulTeamA = 0;
-    int foulTeamB = 0;
+    public static final int MIN_SCORE_VALUE = 0;
 
-    TextView scoreViewA;
-    TextView scoreViewB;
-    TextView foulViewA;
-    TextView foulViewB;
+    private int scoreTeamA;
+    private int scoreTeamB;
+    private int foulTeamA;
+    private int foulTeamB;
+
+    private TextView scoreViewA;
+    private TextView scoreViewB;
+    private TextView foulViewA;
+    private TextView foulViewB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +29,17 @@ public class MainActivity extends AppCompatActivity {
         foulViewB = findViewById(R.id.team_b_foul);
 
         //retrieve values that are saved
-        if (savedInstanceState!=null) {
-            scoreTeamA = savedInstanceState.getInt("scoreA",0);
-            scoreTeamB = savedInstanceState.getInt("scoreB",0);
-            foulTeamA = savedInstanceState.getInt("foulA",0);
-            foulTeamB = savedInstanceState.getInt("foulB",0);
+        if (savedInstanceState != null) {
+            scoreTeamA = savedInstanceState.getInt("scoreA", 0);
+            scoreTeamB = savedInstanceState.getInt("scoreB", 0);
+            foulTeamA = savedInstanceState.getInt("foulA", 0);
+            foulTeamB = savedInstanceState.getInt("foulB", 0);
             displayScoreForTeamA();
             displayScoreForTeamB();
-            if (foulTeamA > 0) {
-                displayFoulForTeamA("# of fouls: " + foulTeamA );
+            if (foulTeamA > MIN_SCORE_VALUE) {
+                displayFoulForTeamA("# of fouls: " + foulTeamA);
             }
-            if (foulTeamB > 0) {
+            if (foulTeamB > MIN_SCORE_VALUE) {
                 displayFoulForTeamB("# of fouls: " + foulTeamB);
             }
         }
@@ -46,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
     //Saving the variables when the screen is rotated
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt("scoreA",scoreTeamA);
-        outState.putInt("scoreB",scoreTeamB);
-        outState.putInt("foulA",foulTeamA);
-        outState.putInt("foulB",foulTeamB);
+        outState.putInt("scoreA", scoreTeamA);
+        outState.putInt("scoreB", scoreTeamB);
+        outState.putInt("foulA", foulTeamA);
+        outState.putInt("foulB", foulTeamB);
         super.onSaveInstanceState(outState);
     }
 
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
      * Adds points for Team A.
      */
     public void addPointForTeamA(View v) {
-        scoreTeamA = scoreTeamA + 1;
+        scoreTeamA++;
         displayScoreForTeamA();
     }
 
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
      * Adds fouls for Team A.
      */
     public void addFoulForTeamA(View v) {
-        foulTeamA = foulTeamA + 1;
+        foulTeamA++;
         String foulMessage = "# of fouls: " + foulTeamA;
         displayFoulForTeamA(foulMessage);
     }
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
      * Adds points for Team B.
      */
     public void addPointForTeamB(View v) {
-        scoreTeamB = scoreTeamB + 1;
+        scoreTeamB++;
         displayScoreForTeamB();
     }
 
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
      * Adds fouls for Team B.
      */
     public void addFoulForTeamB(View v) {
-        foulTeamB = foulTeamB + 1;
+        foulTeamB++;
         String foulMessage = "# of fouls: " + foulTeamB;
         displayFoulForTeamB(foulMessage);
     }
@@ -120,10 +122,10 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void reset(View v) {
-        scoreTeamB = 0;
-        scoreTeamA = 0;
-        foulTeamB = 0;
-        foulTeamA = 0;
+        scoreTeamB = MIN_SCORE_VALUE;
+        scoreTeamA = MIN_SCORE_VALUE;
+        foulTeamB = MIN_SCORE_VALUE;
+        foulTeamA = MIN_SCORE_VALUE;
         displayScoreForTeamA();
         displayScoreForTeamB();
         displayFoulForTeamA("");
